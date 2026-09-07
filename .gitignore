@@ -1,0 +1,7 @@
+# Copyrighted audio kept out of the public repo (add your own licensed track as music.mp3 locally)
+music.mp3
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
