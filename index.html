@@ -854,7 +854,13 @@
     }
     function stopSynth() {
       synthOn = false; if (loop) { clearTimeout(loop); loop = null; }
-      if (master && actx) { master.gain.cancelScheduledValues(actx.currentTime); master.gain.setTargetAtValue(0.0001, actx.currentTime, 0.06); }
+      if (master && actx) {
+        try {
+          master.gain.cancelScheduledValues(actx.currentTime);
+          master.gain.setValueAtTime(master.gain.value, actx.currentTime);
+          master.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.25);
+        } catch (e) { try { master.gain.value = 0; } catch (e2) {} }
+      }
     }
 
     function startMusic() {
